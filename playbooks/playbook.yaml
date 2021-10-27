@@ -1,0 +1,9 @@
+---
+- name: Configure webservers
+  hosts: aws
+  become: True
+  tasks:
+    - name: copy index.html
+      template: src=templates/index.html.j2 dest=/var/www/html/index.html mode=0644
+    - name: restart httpd
+      service: name=httpd state=restarted
